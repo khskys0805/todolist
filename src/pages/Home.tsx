@@ -1,19 +1,42 @@
 import { useState } from "react";
+import { useTodoStore } from "../store/zustand/todoStore";
+import TodoItem from "../components/TodoItem";
 
 const Home = () => {
 	const [input, setInput] = useState("");
+	const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore();
 
+	const handleAdd = () => {
+		if (input.trim() === "") return;
+		addTodo(input);
+		setInput("");
+	};
 	return (
-		<div>
-			<h1>투두 리스트</h1>
+		<div className="mt-20">
+			<h1 className="text-3xl font-bold mb-10">✔️ ToDoList</h1>
 			<input
 				value={input}
 				onChange={(e) => setInput(e.target.value)}
 				placeholder="할 일을 적어주세요"
+				className="px-3 py-2 outline-none rounded-md border border-[#dbdbdb] w-100 mr-3"
 			/>
-			<button>추가</button>
+			<button
+				onClick={handleAdd}
+				className="bg-[#3f3f3f] text-white px-3 py-2 rounded-md"
+			>
+				추가
+			</button>
 
-			<ul></ul>
+			<ul>
+				{todos.map((todo) => (
+					<TodoItem
+						key={todo.id}
+						todo={todo}
+						onToggle={() => toggleTodo(todo.id)}
+						onRemove={() => removeTodo(todo.id)}
+					/>
+				))}
+			</ul>
 		</div>
 	);
 };
