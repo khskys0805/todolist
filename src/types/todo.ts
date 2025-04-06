@@ -3,3 +3,7 @@ export interface Todo {
 	text: string;
 	done: boolean;
 }
+
+export interface ToDoState {
+	todos: Todo[];
+}
