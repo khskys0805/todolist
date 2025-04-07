@@ -4,17 +4,31 @@ import TodoItem from "../components/TodoItem";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/redux/store";
 import { addTodo, removeTodo, toggleTodo } from "../store/redux/todoStore";
+import {
+	todosAtom,
+	addTodoAtom,
+	toggleTodoAtom,
+	removeTodoAtom,
+} from "../store/jotai/todoAtoms"; // jotai
+import { useAtom, useSetAtom } from "jotai";
 
 const Home = () => {
 	const [input, setInput] = useState("");
 	// const { todos, addTodo, toggleTodo, removeTodo } = useTodoStore(); // zustand 사용
-	const todos = useSelector((state: RootState) => state.todo.todos); // todo:store에 등록된 이름 (todoReducer가 저장된 위치) .todos: 그 안에 있는 실제 todo 배열열
-	const dispatch = useDispatch();
+	// const todos = useSelector((state: RootState) => state.todo.todos); // redux 사용 - todo:store에 등록된 이름 (todoReducer가 저장된 위치) .todos: 그 안에 있는 실제 todo 배열
+	// const dispatch = useDispatch(); // redux 사용
+
+	const [todos] = useAtom(todosAtom);
+
+	const addTodo = useSetAtom(addTodoAtom);
+	const toggleTodo = useSetAtom(toggleTodoAtom);
+	const removeTodo = useSetAtom(removeTodoAtom);
 
 	const handleAdd = () => {
 		if (input.trim() === "") return;
 		// addTodo(input); // zustand
-		dispatch(addTodo(input)); // redux
+		// dispatch(addTodo(input)); // redux
+		addTodo(input); // jotai
 		setInput("");
 	};
 	return (
@@ -40,8 +54,10 @@ const Home = () => {
 					<TodoItem
 						key={todo.id}
 						todo={todo}
-						onToggle={() => dispatch(toggleTodo(todo.id))} // redux
-						onRemove={() => dispatch(removeTodo(todo.id))} // redux
+						onToggle={() => toggleTodo(todo.id)}
+						onRemove={() => removeTodo(todo.id)}
+						// onToggle={() => dispatch(toggleTodo(todo.id))} // redux
+						// onRemove={() => dispatch(removeTodo(todo.id))} // redux
 						// onToggle={() => toggleTodo(todo.id)} // zustand
 						// onRemove={() => removeTodo(todo.id)} // zustand
 					/>
