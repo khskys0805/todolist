@@ -1,46 +1,106 @@
-# Getting Started with Create React App
+# 🧪 State Management Comparison - ToDo App (CRA + TypeScript)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React에서 자주 사용되는 상태관리 라이브러리인 **Redux**, **Zustand**, **Jotai**를 직접 적용해본 간단한 ToDo 애플리케이션입니다.  
+각 라이브러리의 사용 방식과 코드 구조를 비교하기 위해 동일한 기능을 바탕으로 구성되어 있습니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🔍 목적
 
-### `npm start`
+-   다양한 상태관리 라이브러리를 직접 적용해보며 장단점 비교
+-   실제 구현을 통한 API 사용 방식, 보일러플레이트 양, 코드 가독성 확인
+-   상황에 따라 가장 적합한 상태관리 도구 선택 기준 마련
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## ⚙️ 기술 스택
 
-### `npm test`
+-   **CRA (Create React App) + TypeScript**
+-   **TailwindCSS** – 기본 UI 스타일링
+-   **Redux**
+-   **Zustand**
+-   **Jotai**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📁 프로젝트 구조
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+todo-state-comparison/
+├── public/
+├── src/
+│   ├── components/        # 공통 컴포넌트 (ToDoItem 등)
+│   ├── pages/             # 페이지 컴포넌트 (Home 등)
+│   ├── store/             # 상태관리 라이브러리별 상태 정의
+│   │   ├── redux/         # Redux 관련 코드
+│   │   ├── zustand/       # Zustand 관련 코드
+│   │   └── jotai/         # Jotai 관련 코드
+│   ├── types/             # 전역 타입 정의
+│   ├── App.tsx            # 메인 앱 컴포넌트
+│   └── index.tsx          # 진입점
+├── tailwind.config.js
+├── tsconfig.json
+└── README.md
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ✅ 기능
 
-### `npm run eject`
+-   할 일 추가
+-   할 일 삭제
+-   완료 여부 토글
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+모든 상태관리 버전에서 위 기능은 동일하게 동작하며, 상태관리 방식만 다르게 구성되어 있습니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🧩 상태관리별 비교
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+| 항목           | Redux                        | Zustand       | Jotai                |
+| -------------- | ---------------------------- | ------------- | -------------------- |
+| 보일러플레이트 | 많음 (action, reducer 등)    | 적음          | 매우 적음            |
+| 코드 구조화    | 강제적, 분리 명확            | 자유롭고 유연 | 매우 간단하고 직관적 |
+| 사용 난이도    | 초반 진입장벽 높음           | 낮음          | 가장 쉬움            |
+| 상태 추적      | DevTools 등 강력한 도구 제공 | 지원          | 기본 제공            |
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚀 실행 방법
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+각 상태관리 폴더별로 따로 구성된 것이 아닌, **앱 내에서 상태관리 방식만 전환해서 테스트**할 수 있도록 되어 있습니다.  
+기본적으로는 Jotai로 설정되어 있습니다.
+
+1. 프로젝트 클론
+
+    ```bash
+    git clone https://github.com/khskys0805/todolist
+    cd todolist
+    ```
+
+2. 패키지 설치
+
+    ```bash
+    npm install
+    ```
+
+3. 실행
+    ```bash
+    npm start
+    ```
+
+> 상태관리 라이브러리를 변경하고 싶다면 `Home.tsx`에서 주석처리 해놓은 해당 상태관리 라이브러리를 활성화시키시면 됩니다. (다른 라이브러리는 다시 주석처리리)
+
+---
+
+## 📌 참고사항
+
+-   **Redux는 Toolkit 없이 전통적인 방식**으로 구성되어 있어, 가장 기본적인 형태의 Redux 사용법 학습에 도움이 됩니다.
+-   TailwindCSS를 도입해 빠르게 레이아웃을 구성하고 기능 테스트에 집중할 수 있도록 구성했습니다.
+
+---
+
+## 🧠 마무리
+
+이 프로젝트는 실무에서 상태관리 도구를 선택하기 전, 빠르게 경험해보고 판단할 수 있는 실습용 템플릿입니다.  
+필요시 각각의 구현을 더 확장해보고, 전역 상태 외에 비동기 처리 등도 비교해보세요!
