@@ -1,6 +1,5 @@
 import { atom } from "jotai";
 import { Todo } from "../../types/todo";
-import exp from "constants";
 
 export const todosAtom = atom<Todo[]>([]);
 
